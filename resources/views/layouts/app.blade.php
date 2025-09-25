@@ -1,15 +1,31 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@yield('title', 'BanVeMayBay')</title>
+    <style>
+      body{font-family: Arial, sans-serif;margin:20px}
+      table{border-collapse:collapse;width:100%}
+      table td, table th{border:1px solid #ddd;padding:8px}
+      a.button{display:inline-block;padding:6px 10px;background:#2d87f0;color:#fff;text-decoration:none;border-radius:4px}
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ route('khachhang.index') }}">Khách hàng</a>
 
-@section('title','Chi tiết khách hàng')
+        {{-- Nếu layout cần hiển thị thông tin cụ thể của 1 khách hàng (chỉ làm khi biến tồn tại) --}}
+        @isset($khachhang)
+            | <a href="{{ route('khachhang.show', $khachhang->id) }}">Đang xem: {{ $khachhang->ten }}</a>
+        @endisset
+    </nav>
 
-@section('content')
-    <h1>Chi tiết khách hàng</h1>
+    <hr>
 
-    <p><strong>ID:</strong> {{ $khachhang->id }}</p>
-    <p><strong>Tên:</strong> {{ $khachhang->ten }}</p>
-    <p><strong>Email:</strong> {{ $khachhang->email }}</p>
-    <p><strong>SĐT:</strong> {{ $khachhang->so_dien_thoai }}</p>
+    @if(session('success'))
+        <div style="color:green">{{ session('success') }}</div>
+    @endif
 
-    <a href="{{ route('khachhang.edit', $khachhang->id) }}">Sửa</a>
-    <a href="{{ route('khachhang.index') }}">Quay lại</a>
-@endsection
+    @yield('content')
+</body>
+</html>

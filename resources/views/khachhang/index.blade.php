@@ -5,38 +5,60 @@
 @section('content')
     <h1>Danh sách khách hàng</h1>
 
-    <a class="button" href="{{ route('khachhang.create') }}">+ Thêm khách hàng</a>
-    <br><br>
+    {{-- Nút thêm khách hàng --}}
+    
+    <a href="/khachhang/create">+ Thêm khách hàng</a>
 
-    <table>
-        <thead>
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse">
+        <thead style="background:#f2f2f2">
             <tr>
-                <th>ID</th><th>Tên</th><th>Email</th><th>SĐT</th><th>Hành động</th>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>SĐT</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($khachHangs as $kh)
                 <tr>
                     <td>{{ $kh->id }}</td>
-                    <td><a href="{{ route('khachhang.show', $kh->id) }}">{{ $kh->ten }}</a></td>
+                    <td>
+                        <a href="/khachhang/{{ $kh->id }}">
+                            {{ $kh->ten }}
+                        </a> 
+                    </td>
                     <td>{{ $kh->email }}</td>
                     <td>{{ $kh->so_dien_thoai }}</td>
                     <td>
-                        <a href="{{ route('khachhang.edit', $kh->id) }}">Sửa</a>
-                        <form action="{{ route('khachhang.destroy', $kh->id) }}" method="POST" style="display:inline">
+                        {{-- Nút sửa --}}
+                        <a href="/khachhang/{{ $kh->id }}/edit"
+                           style="margin-right:5px; color:blue">Sửa</a>
+
+                        {{-- Form xóa --}}
+                        <form action="{{ route('khachhang.destroy', $kh->id) }}" 
+                              method="POST" 
+                              style="display:inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Xóa?')">Xóa</button>
+                            <button type="submit" 
+                                    onclick="return confirm('Bạn chắc chắn muốn xóa?')" 
+                                    style="color:red; background:none; border:none; cursor:pointer">
+                                Xóa
+                            </button>
                         </form>
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="5">Không có khách hàng</td></tr>
+                <tr>
+                    <td colspan="5" style="text-align:center">Không có khách hàng</td>
+                </tr>
             @endforelse
         </tbody>
     </table>
 
-    <div style="margin-top:10px">
+    {{-- Phân trang --}}
+    <div style="margin-top:15px">
         {{ $khachHangs->links() }}
     </div>
 @endsection

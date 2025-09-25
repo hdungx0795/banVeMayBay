@@ -19,6 +19,7 @@ class KhachHangController extends Controller
         return view('khachhang.index', compact('khachHangs'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */

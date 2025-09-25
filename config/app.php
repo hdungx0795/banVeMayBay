@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://sturdy-waddle-v6g4vvggq7473x597-8000.app.github.dev'),
 
     /*
     |--------------------------------------------------------------------------

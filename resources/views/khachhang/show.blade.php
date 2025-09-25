@@ -11,5 +11,5 @@
     <p><strong>SĐT:</strong> {{ $khachhang->so_dien_thoai }}</p>
 
     <a href="{{ route('khachhang.edit', $khachhang->id) }}">Sửa</a>
-    <a href="{{ route('khachhang.index') }}">Quay lại</a>
+    <a href="/khachhang">Quay lại</a>
 @endsection

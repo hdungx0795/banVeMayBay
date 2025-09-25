@@ -5,30 +5,43 @@
 @section('content')
     <h1>Sửa khách hàng</h1>
 
+    {{-- Hiển thị lỗi validate --}}
     @if ($errors->any())
-        <ul style="color:red">
-            @foreach ($errors->all() as $err)
-                <li>{{ $err }}</li>
-            @endforeach
-        </ul>
+        <div style="color:red; margin-bottom:10px">
+            <ul>
+                @foreach ($errors->all() as $err)
+                    <li>{{ $err }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
-    <form action="{{ route('khachhang.update', $khachhang->id) }}" method="POST">
+    <form action="{{ route('khachhang.update', $khachhang->id) }}" method="POST" style="max-width:400px">
         @csrf
         @method('PUT')
-        <div>
-            <label>Tên</label><br>
-            <input type="text" name="ten" value="{{ old('ten', $khachhang->ten) }}">
+
+        <div style="margin-bottom:10px">
+            <label for="ten">Tên</label><br>
+            <input type="text" id="ten" name="ten" 
+                   value="{{ old('ten', $khachhang->ten) }}" required>
         </div>
-        <div>
-            <label>Email</label><br>
-            <input type="email" name="email" value="{{ old('email', $khachhang->email) }}">
+
+        <div style="margin-bottom:10px">
+            <label for="email">Email</label><br>
+            <input type="email" id="email" name="email" 
+                   value="{{ old('email', $khachhang->email) }}" required>
         </div>
-        <div>
-            <label>Số điện thoại</label><br>
-            <input type="text" name="so_dien_thoai" value="{{ old('so_dien_thoai', $khachhang->so_dien_thoai) }}">
+
+        <div style="margin-bottom:10px">
+            <label for="so_dien_thoai">Số điện thoại</label><br>
+            <input type="text" id="so_dien_thoai" name="so_dien_thoai" 
+                   value="{{ old('so_dien_thoai', $khachhang->so_dien_thoai) }}">
         </div>
-        <br>
-        <button type="submit">Cập nhật</button>
+
+        <div>
+            <button type="submit" style="padding:5px 15px">Cập nhật</button>
+            <a href="/khachhang">Quay lại</a>
+        </div>
     </form>
 @endsection
+
